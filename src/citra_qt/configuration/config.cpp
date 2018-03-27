@@ -155,11 +155,11 @@ void Config::ReadValues() {
     qt_config->beginGroup("WebService");
     Settings::values.enable_telemetry = qt_config->value("enable_telemetry", true).toBool();
     Settings::values.telemetry_endpoint_url =
-        qt_config->value("telemetry_endpoint_url", "https://services.citra-emu.org/api/telemetry")
+        qt_config->value("telemetry_endpoint_url", "https://api.citra-emu.org/telemetry")
             .toString()
             .toStdString();
     Settings::values.verify_endpoint_url =
-        qt_config->value("verify_endpoint_url", "https://services.citra-emu.org/api/profile")
+        qt_config->value("verify_endpoint_url", "https://api.citra-emu.org/profile")
             .toString()
             .toStdString();
     Settings::values.citra_username = qt_config->value("citra_username").toString().toStdString();

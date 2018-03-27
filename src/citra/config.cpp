@@ -171,12 +171,12 @@ void Config::ReadValues() {
     Settings::values.enable_telemetry =
         sdl2_config->GetBoolean("WebService", "enable_telemetry", true);
     Settings::values.telemetry_endpoint_url = sdl2_config->Get(
-        "WebService", "telemetry_endpoint_url", "https://services.citra-emu.org/api/telemetry");
+        "WebService", "telemetry_endpoint_url", "https://api.citra-emu.org/telemetry");
     Settings::values.verify_endpoint_url = sdl2_config->Get(
-        "WebService", "verify_endpoint_url", "https://services.citra-emu.org/api/profile");
+        "WebService", "verify_endpoint_url", "https://api.citra-emu.org/profile");
     Settings::values.announce_multiplayer_room_endpoint_url =
         sdl2_config->Get("WebService", "announce_multiplayer_room_endpoint_url",
-                         "https://services.citra-emu.org/api/multiplayer/rooms");
+                         "https://api.citra-emu.org/lobby");
     Settings::values.citra_username = sdl2_config->Get("WebService", "citra_username", "");
     Settings::values.citra_token = sdl2_config->Get("WebService", "citra_token", "");
 }

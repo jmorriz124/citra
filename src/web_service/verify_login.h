@@ -14,7 +14,7 @@ namespace WebService {
  * Checks if username and token is valid
  * @param username Citra username to use for authentication.
  * @param token Citra token to use for authentication.
- * @param endpoint_url URL of the services.citra-emu.org endpoint.
+ * @param endpoint_url URL of the api.citra-emu.org endpoint.
  * @param func A function that gets exectued when the verification is finished
  * @returns Future with bool indicating whether the verification succeeded
  */

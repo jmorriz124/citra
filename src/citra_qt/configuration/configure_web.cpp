@@ -29,7 +29,7 @@ void ConfigureWeb::setConfiguration() {
                                          "telemetry-and-why-thats-a-good-thing/'>Learn more</a>"));
 
     ui->web_signup_link->setOpenExternalLinks(true);
-    ui->web_signup_link->setText(tr("<a href='https://services.citra-emu.org/'>Sign up</a>"));
+    ui->web_signup_link->setText(tr("<a href='https://profile.citra-emu.org/'>Sign up</a>"));
     ui->web_token_info_link->setOpenExternalLinks(true);
     ui->web_token_info_link->setText(
         tr("<a href='https://citra-emu.org/wiki/citra-web-service/'>What is my token?</a>"));

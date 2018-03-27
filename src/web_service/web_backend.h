@@ -14,7 +14,7 @@
 namespace WebService {
 
 /**
- * Posts JSON to services.citra-emu.org.
+ * Posts JSON to api.citra-emu.org.
  * @param url URL of the services.citra-emu.org endpoint to post data to.
  * @param data String of JSON data to use for the body of the POST request.
  * @param allow_anonymous If true, allow anonymous unauthenticated requests.
@@ -27,7 +27,7 @@ std::future<Common::WebResult> PostJson(const std::string& url, const std::strin
                                         const std::string& token = {});
 
 /**
- * Gets JSON from services.citra-emu.org.
+ * Gets JSON from api.citra-emu.org.
  * @param func A function that gets exectued when the json as a string is received
  * @param url URL of the services.citra-emu.org endpoint to post data to.
  * @param allow_anonymous If true, allow anonymous unauthenticated requests.
@@ -41,7 +41,7 @@ std::future<T> GetJson(std::function<T(const std::string&)> func, const std::str
                        const std::string& token = {});
 
 /**
- * Delete JSON to services.citra-emu.org.
+ * Delete JSON to api.citra-emu.org.
  * @param url URL of the services.citra-emu.org endpoint to post data to.
  * @param data String of JSON data to use for the body of the DELETE request.
  * @param username Citra username to use for authentication.

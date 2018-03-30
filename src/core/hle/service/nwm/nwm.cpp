@@ -3,6 +3,7 @@
 // Refer to the license.txt file included.
 
 #include <cryptopp/osrng.h>
+#include "core/settings.h"
 #include "core/hle/service/nwm/nwm.h"
 #include "core/hle/service/nwm/nwm_cec.h"
 #include "core/hle/service/nwm/nwm_ext.h"
@@ -37,6 +38,8 @@ void Init() {
     }
     SharedPage::SetMacAddress(mac);
     SharedPage::SetWifiLinkLevel(SharedPage::WifiLinkLevel::BEST);
+    u8 slidestate = (Settings::values.toggle_3d ? 1.0f : 0.0f);
+    SharedPage::Set3DSliderState(slidestate);
 }
 
 void InstallInterfaces(SM::ServiceManager& service_manager) {

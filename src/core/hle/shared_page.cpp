@@ -93,4 +93,8 @@ void SetWifiLinkLevel(WifiLinkLevel level) {
     shared_page.wifi_link_level = static_cast<u8>(level);
 }
 
+void Set3DSliderState(u8 state) {
+    shared_page.sliderstate_3d = static_cast<u8>(state);
+}
+
 } // namespace SharedPage

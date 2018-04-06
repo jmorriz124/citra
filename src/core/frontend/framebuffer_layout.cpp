@@ -174,6 +174,77 @@ FramebufferLayout SideFrameLayout(unsigned width, unsigned height, bool swapped)
     return res;
 }
 
+FramebufferLayout StereoscopicLayout(unsigned width, unsigned height) {
+    ASSERT(width > 0);
+    ASSERT(height > 0);
+
+    FramebufferLayout res{width, height, true, true, {}, {}};
+    // Default layout gives equal screen sizes to the top and bottom screen
+    MathUtil::Rectangle<unsigned> screen_window_area{0, 0, width / 2, height / 2};
+    MathUtil::Rectangle<unsigned> top_screen =
+        maxRectangle(screen_window_area, TOP_SCREEN_ASPECT_RATIO);
+    MathUtil::Rectangle<unsigned> bot_screen =
+        maxRectangle(screen_window_area, BOT_SCREEN_ASPECT_RATIO);
+
+    float window_aspect_ratio = static_cast<float>(height) / width;
+
+    const float emulation_aspect_ratio =
+        static_cast<float>(Core::kScreenTopHeight + Core::kScreenBottomHeight) /
+        (Core::kScreenTopWidth * 2);
+
+    if (window_aspect_ratio < emulation_aspect_ratio) {
+        // Apply borders to the left and right sides of the window.
+        top_screen =
+            top_screen.TranslateX((screen_window_area.GetWidth() - top_screen.GetWidth()) / 2);
+        bot_screen =
+            bot_screen.TranslateX((screen_window_area.GetWidth() - bot_screen.GetWidth()) / 2);
+    } else {
+        // Window is narrower than the emulation content => apply borders to the top and bottom
+        // Recalculate the bottom screen to account for the width difference between top and bottom
+        screen_window_area = {0, 0, width, top_screen.GetHeight()};
+        bot_screen = maxRectangle(screen_window_area, BOT_SCREEN_ASPECT_RATIO);
+        bot_screen = bot_screen.TranslateX((top_screen.GetWidth() - bot_screen.GetWidth()) / 2);
+        top_screen = top_screen.TranslateY(height / 2 - top_screen.GetHeight());
+    }
+    // Move the top screen to the bottom if we are swapped.
+    res.top_screen = top_screen;
+    res.bottom_screen = bot_screen.TranslateY(height / 2);
+    return res;
+}
+
+FramebufferLayout StereoscopicSingleScreenLayout(unsigned width, unsigned height) {
+    ASSERT(width > 0);
+    ASSERT(height > 0);
+
+    FramebufferLayout res{width, height, true, false, {}, {}};
+
+    // Aspect ratio of the Top Screen * 2 side by side
+    const float emulation_aspect_ratio =
+        static_cast<float>(Core::kScreenTopHeight) / (Core::kScreenTopWidth * 2);
+
+    float window_aspect_ratio = static_cast<float>(height) / width;
+    MathUtil::Rectangle<unsigned> screen_window_area{0, 0, width, height};
+    // Find largest Rectangle that can fit in the window size with the given aspect ratio
+    MathUtil::Rectangle<unsigned> screen_rect =
+        maxRectangle(screen_window_area, emulation_aspect_ratio);
+    // Find sizes of top and bottom screen
+    MathUtil::Rectangle<unsigned> top_screen = maxRectangle(screen_rect, TOP_SCREEN_ASPECT_RATIO);
+    MathUtil::Rectangle<unsigned> bot_screen = maxRectangle(screen_rect, BOT_SCREEN_ASPECT_RATIO);
+
+    if (window_aspect_ratio < emulation_aspect_ratio) {
+        // Apply borders to the left and right sides of the window.
+        u32 shift_horizontal = (screen_window_area.GetWidth() - screen_rect.GetWidth()) / 2;
+        top_screen = top_screen.TranslateX(shift_horizontal);
+    } else {
+        // Window is narrower than the emulation content => apply borders to the top and bottom
+        u32 shift_vertical = (screen_window_area.GetHeight() - screen_rect.GetHeight()) / 2;
+        top_screen = top_screen.TranslateY(shift_vertical);
+    }
+    res.top_screen = top_screen;
+    res.bottom_screen = bot_screen;
+    return res;
+}
+
 FramebufferLayout CustomFrameLayout(unsigned width, unsigned height) {
     ASSERT(width > 0);
     ASSERT(height > 0);

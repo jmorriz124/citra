@@ -12,6 +12,7 @@
 #include "core/hle/service/nwm/nwm_tst.h"
 #include "core/hle/service/nwm/nwm_uds.h"
 #include "core/hle/shared_page.h"
+#include "core/settings.h"
 #include "network/network.h"
 
 namespace Service {
@@ -37,6 +38,10 @@ void Init() {
     }
     SharedPage::SetMacAddress(mac);
     SharedPage::SetWifiLinkLevel(SharedPage::WifiLinkLevel::BEST);
+
+    float_le slidestate =
+        Settings::values.toggle_3d ? (float_le)Settings::values.factor_3d / 100 : 0.0f;
+    SharedPage::Set3DSliderState(slidestate);
 }
 
 void InstallInterfaces(SM::ServiceManager& service_manager) {

@@ -94,6 +94,8 @@
      <addaction name="action_Screen_Layout_Single_Screen"/>
      <addaction name="action_Screen_Layout_Large_Screen"/>
      <addaction name="action_Screen_Layout_Side_by_Side"/>
+     <addaction name="action_Screen_Layout_Stereoscopic"/>
+     <addaction name="action_Screen_Layout_StereoscopicSingleScreen"/>
      <addaction name="separator"/>
      <addaction name="action_Screen_Layout_Swap_Screens"/>
     </widget>
@@ -274,6 +276,22 @@
      </property>
      <property name="text">
        <string>Side by Side</string>
+     </property>
+   </action>
+   <action name="action_Screen_Layout_Stereoscopic">
+     <property name="checkable">
+       <bool>true</bool>
+     </property>
+     <property name="text">
+       <string>Stereoscopic</string>
+     </property>
+   </action>
+   <action name="action_Screen_Layout_StereoscopicSingleScreen">
+     <property name="checkable">
+       <bool>true</bool>
+     </property>
+     <property name="text">
+       <string>Stereoscopic (Top Only)</string>
      </property>
    </action>
    <action name="action_Screen_Layout_Swap_Screens">

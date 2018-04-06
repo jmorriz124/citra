@@ -16,6 +16,8 @@ enum class LayoutOption {
     SingleScreen,
     LargeScreen,
     SideScreen,
+    Stereoscopic,
+    StereoscopicSingleScreen,
 };
 
 namespace NativeButton {
@@ -128,6 +130,9 @@ struct Values {
     float bg_red;
     float bg_green;
     float bg_blue;
+
+    bool toggle_3d;
+    u8 factor_3d;
 
     std::string log_filter;
 

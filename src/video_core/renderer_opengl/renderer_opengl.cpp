@@ -401,6 +401,8 @@ void RendererOpenGL::DrawScreens() {
         DrawSingleScreenRotated(screen_infos[0], (float)top_screen.left, (float)top_screen.top,
                                 (float)top_screen.GetWidth(), (float)top_screen.GetHeight());
         if (Settings::values.toggle_3d) {
+            // top_screen.left * 3 + top_screen.GetWidth accomodates Borders (Left Border, Screen,
+            // Right Border * 2)
             DrawSingleScreenRotated(
                 screen_infos[1], ((float)top_screen.left * 3) + (float)top_screen.GetWidth(),
                 (float)top_screen.top, (float)top_screen.GetWidth(), (float)top_screen.GetHeight());
@@ -411,6 +413,8 @@ void RendererOpenGL::DrawScreens() {
                                 (float)bottom_screen.top, (float)bottom_screen.GetWidth(),
                                 (float)bottom_screen.GetHeight());
         if (Settings::values.toggle_3d) {
+            // bottom_screen.left * 3 + bottom_screen.GetWidth accomodates Borders (Left Border,
+            // Screen, Right Border * 2)
             DrawSingleScreenRotated(
                 screen_infos[2], ((float)bottom_screen.left * 3) + (float)bottom_screen.GetWidth(),
                 (float)bottom_screen.top, (float)bottom_screen.GetWidth(),

@@ -142,9 +142,11 @@ struct Regs {
             u32 format;
 
             BitField<0, 3, PixelFormat> color_format;
+            BitField<0, 1, u32> parallax_enabled;
         };
 
         INSERT_PADDING_WORDS(0x1);
+
 
         union {
             u32 active_fb;

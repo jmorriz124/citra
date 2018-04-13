@@ -165,8 +165,8 @@ void RendererOpenGL::LoadFBToScreenInfo(const GPU::Regs::FramebufferConfig& fram
 
     const PAddr framebuffer_addr =
         framebuffer.active_fb == 0
-            ? (!right_eye ? framebuffer.address_left1 : framebuffer.address_right1)
-            : (!right_eye ? framebuffer.address_left2 : framebuffer.address_right2);
+            ? ((!right_eye) ? framebuffer.address_left1 : framebuffer.address_right1)
+            : ((!right_eye) ? framebuffer.address_left2 : framebuffer.address_right2);
 
     LOG_TRACE(Render_OpenGL, "0x%08x bytes from 0x%08x(%dx%d), fmt %x",
               framebuffer.stride * framebuffer.height, framebuffer_addr, (int)framebuffer.width,

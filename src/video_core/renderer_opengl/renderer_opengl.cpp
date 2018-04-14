@@ -163,6 +163,7 @@ void RendererOpenGL::SwapBuffers() {
 void RendererOpenGL::LoadFBToScreenInfo(const GPU::Regs::FramebufferConfig& framebuffer,
                                         ScreenInfo& screen_info, bool right_eye) {
 
+    LOG_WARNING(Render_OpenGL, "Parallax Value: %d", static_cast<int>(framebuffer.parallax_enabled));
     const PAddr framebuffer_addr =
         framebuffer.active_fb == 0
             ? ((!right_eye) ? framebuffer.address_left1 : framebuffer.address_right1)

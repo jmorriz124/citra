@@ -123,10 +123,10 @@ void EmuWindow::UpdateCurrentFramebufferLayout(unsigned width, unsigned height) 
             layout = Layout::SideFrameLayout(width, height, Settings::values.swap_screen);
             break;
         case Settings::LayoutOption::Stereoscopic:
-            layout = Layout::StereoscopicLayout(width, height);
+            layout = Layout::StereoscopicLayout(width, height, Settings::values.swap_screen);
             break;
         case Settings::LayoutOption::StereoscopicSingleScreen:
-            layout = Layout::StereoscopicSingleScreenLayout(width, height);
+            layout = Layout::StereoscopicSingleScreenLayout(width, height, Settings::values.swap_screen);
             break;
         case Settings::LayoutOption::Default:
         default:

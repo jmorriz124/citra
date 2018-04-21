@@ -70,7 +70,7 @@ FramebufferLayout SideFrameLayout(unsigned width, unsigned height, bool is_swapp
  * @param height Window framebuffer height in pixels
  * @return Newly created FramebufferLayout object with default screen regions initialized
  */
-FramebufferLayout StereoscopicLayout(unsigned width, unsigned height);
+FramebufferLayout StereoscopicLayout(unsigned width, unsigned height, bool is_swapped);
 
 /**
  * Factory method for constructing a Frame compatible with 3D Monitors (Top Screen Only)
@@ -78,7 +78,7 @@ FramebufferLayout StereoscopicLayout(unsigned width, unsigned height);
  * @param height Window framebuffer height in pixels
  * @return Newly created FramebufferLayout object with default screen regions initialized
  */
-FramebufferLayout StereoscopicSingleScreenLayout(unsigned width, unsigned height);
+FramebufferLayout StereoscopicSingleScreenLayout(unsigned width, unsigned height, bool is_swapped);
 
 /**
  * Factory method for constructing a custom FramebufferLayout

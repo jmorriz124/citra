@@ -126,7 +126,8 @@ void EmuWindow::UpdateCurrentFramebufferLayout(unsigned width, unsigned height) 
             layout = Layout::StereoscopicLayout(width, height, Settings::values.swap_screen);
             break;
         case Settings::LayoutOption::StereoscopicSingleScreen:
-            layout = Layout::StereoscopicSingleScreenLayout(width, height, Settings::values.swap_screen);
+            layout =
+                Layout::StereoscopicSingleScreenLayout(width, height, Settings::values.swap_screen);
             break;
         case Settings::LayoutOption::Default:
         default:

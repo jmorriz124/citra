@@ -1315,7 +1315,6 @@ void GMainWindow::SyncMenuUISettings() {
     ui.action_Screen_Layout_Side_by_Side->setCheckable(!Settings::values.toggle_3d);
     ui.action_Screen_Layout_Stereoscopic->setCheckable(Settings::values.toggle_3d);
     ui.action_Screen_Layout_StereoscopicSingleScreen->setCheckable(Settings::values.toggle_3d);
-    ui.action_Screen_Layout_Swap_Screens->setCheckable(true);
 
     ui.action_Screen_Layout_Default->setChecked(Settings::values.layout_option ==
                                                 Settings::LayoutOption::Default);

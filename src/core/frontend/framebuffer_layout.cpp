@@ -192,21 +192,17 @@ FramebufferLayout StereoscopicLayout(unsigned width, unsigned height, bool swapp
 
     float window_aspect_ratio = static_cast<float>(height) / width;
 
-    const float emulation_aspect_ratio =
-        static_cast<float>(Core::kScreenTopHeight + Core::kScreenBottomHeight) /
-        (Core::kScreenTopWidth * 2);
-
     // Apply borders to the left and right sides of each window if needed.
     top_screen = top_screen.TranslateX((screen_window_area.GetWidth() - top_screen.GetWidth()) / 2);
     bot_screen = bot_screen.TranslateX((screen_window_area.GetWidth() - bot_screen.GetWidth()) / 2);
 
     // Apply borders to the top and bottom of both windows together if needed.
-    if (!swapped) {
-        top_screen =
-            top_screen.TranslateY((screen_window_area.GetHeight() - top_screen.GetHeight()));
-    } else {
+    if (swapped) {
         bot_screen =
             bot_screen.TranslateY((screen_window_area.GetHeight() - bot_screen.GetHeight()));
+    } else {
+        top_screen =
+            top_screen.TranslateY((screen_window_area.GetHeight() - top_screen.GetHeight()));
     }
 
     // Move the top screen to the bottom if we are swapped.
@@ -219,15 +215,9 @@ FramebufferLayout StereoscopicSingleScreenLayout(unsigned width, unsigned height
     ASSERT(width > 0);
     ASSERT(height > 0);
 
+    float emulation_aspect_ratio = swapped ? BOT_SCREEN_ASPECT_RATIO : TOP_SCREEN_ASPECT_RATIO;
     // Multiply by two to Halve Screen Width, account for 3DTV stretching
-    float finalAspectRatio = !swapped ? TOP_SCREEN_ASPECT_RATIO * 2 : BOT_SCREEN_ASPECT_RATIO * 2;
-
-    const float emulation_aspect_ratio_top =
-        static_cast<float>(Core::kScreenTopHeight) / (Core::kScreenTopWidth);
-    const float emulation_aspect_ratio_bot =
-        static_cast<float>(Core::kScreenBottomHeight) / (Core::kScreenBottomWidth);
-    const float emulation_aspect_ratio =
-        !swapped ? emulation_aspect_ratio_top : emulation_aspect_ratio_bot;
+    float finalAspectRatio = emulation_aspect_ratio * 2;
 
     float window_aspect_ratio = static_cast<float>(height) / width;
     MathUtil::Rectangle<unsigned> screen_window_area{0, 0, width, height};
@@ -249,10 +239,10 @@ FramebufferLayout StereoscopicSingleScreenLayout(unsigned width, unsigned height
     }
 
     FramebufferLayout res{width, height, !swapped, swapped, {}, {}};
-    if (!swapped) {
-        res.top_screen = screen;
-    } else {
+    if (swapped) {
         res.bottom_screen = screen;
+    } else {
+        res.top_screen = screen;
     }
     return res;
 }
